@@ -1,9 +1,9 @@
 REM clean
-rmdir /S /Q build
-rmdir /S /Q output
-	
+if exist build rmdir /S /Q build
+if exist output rmdir /S /Q output
+
 REM install
-mkdir -p output
-mkdir -p build
+if not exist output mkdir output
+if not exist build mkdir build
 latexmk -pdf -bibtex -outdir=../build -cd src/thesis.tex
 move build\thesis.pdf output

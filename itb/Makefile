@@ -1,11 +1,10 @@
 all: clean install
 
 install:
-	mkdir -p output
-	mkdir -p build
+	mkdir -p output build
 	latexmk -pdf -bibtex -outdir=../build -cd src/thesis.tex
 	mv build/thesis.pdf output
 
 clean:
-	rm -f output/* build/*
+	rm -rf output build
 	find . -iname "*~" -exec rm '{}' ';'

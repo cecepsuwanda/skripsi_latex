@@ -1,6 +1,7 @@
 %-------------------------------------------------------------------%
 %
-% Konfigurasi dokumen LaTeX untuk laporan tesis IF ITB
+% Konfigurasi dokumen LaTeX untuk skripsi
+% Program Studi Teknik Informatika, Fakultas Teknologi Informasi, Universitas Bale Bandung
 %
 % @author Petra Novandi
 %
@@ -10,8 +11,8 @@
 %
 %-------------------------------------------------------------------%
 
-% Ukuran kertas
-\special{papersize=210mm,297mm}
+% Ukuran kertas (A4 sudah di documentclass; \special untuk dvips diabaikan oleh pdflatex)
+% \special{papersize=210mm,297mm}
 
 % Setting margin
 \usepackage[top=3cm,bottom=2.5cm,left=4cm,right=2.5cm]{geometry}
@@ -22,14 +23,15 @@
 \usepackage[utf8]{inputenc}
 \usepackage[bahasa]{babel}
 \usepackage{csquotes}
+\DeclareQuoteStyle{bahasa}{``}{''}{`}{'}  % gaya kutip untuk bahasa Indonesia
 
 % Format citation
-\usepackage[backend=bibtex,citestyle=authoryear]{biblatex}
+\usepackage[backend=bibtex,citestyle=authoryear,language=english]{biblatex}
+\DeclareLanguageMapping{bahasa}{english}  % biblatex tidak punya bahasa.lbx; pakai english
 
 \usepackage{graphicx}
 \usepackage{titling}
 \usepackage{blindtext}
-\usepackage{sectsty}
 \usepackage{chngcntr}
 \usepackage{etoolbox}
 \usepackage{hyperref}       % Package untuk link di daftar isi.
@@ -40,8 +42,7 @@
 % Line satu setengah spasi
 \renewcommand{\baselinestretch}{1.5}
 
-% Setting judul
-\chapterfont{\centering \Large}
+% Setting judul bab (tanpa sectsty untuk menghindari konflik \underbar/\underline)
 \titleformat{\chapter}[display]
   {\Large\centering\bfseries}
   {\chaptertitlename\ \thechapter}{0pt}
@@ -51,7 +52,7 @@
 \setcounter{secnumdepth}{3}
 
 \makeatletter
-
+\providecommand{\theyear}{\number\year}  % tahun di halaman cover
 \makeatother
 
 % Counter untuk figure dan table.
